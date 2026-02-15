@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>גלריית תמונות</title>
+    <style>
+      :root {
+        --bg: #f3f5fb;
+        --surface: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #3b82f6;
+        --primary-dark: #2563eb;
+        --border: #e5e7eb;
+        font-family: "Rubik", "Segoe UI", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #eef3ff, var(--bg));
+        color: var(--text);
+      }
+
+      .container {
+        width: min(1100px, 92vw);
+        margin: 40px auto;
+      }
+
+      .header {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        margin-bottom: 24px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+      }
+
+      .subtitle {
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .picker-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .upload-label {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 12px;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .upload-label:hover {
+        background: var(--primary-dark);
+      }
+
+      input[type="file"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .file-count {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        background: var(--surface);
+        border: 1px dashed #cbd5e1;
+        border-radius: 16px;
+        padding: 36px 20px;
+        color: var(--muted);
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.12);
+        border: 1px solid #eef1f6;
+      }
+
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .card-footer {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        color: #475569;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin: 24px auto;
+        }
+
+        .header {
+          padding: 18px;
+          border-radius: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="header">
+        <h1>גלריית התמונות שלי</h1>
+        <p class="subtitle">בחרו כמה תמונות מהמחשב והן יוצגו מיד בגלריה מעוצבת.</p>
+
+        <div class="picker-row">
+          <label class="upload-label" for="image-input">בחירת תמונות</label>
+          <input id="image-input" type="file" accept="image/*" multiple />
+          <span id="file-count" class="file-count">לא נבחרו קבצים</span>
+        </div>
+      </section>
+
+      <section id="gallery" class="gallery" aria-live="polite">
+        <div class="empty-state">עדיין לא נוספו תמונות. לחצו על "בחירת תמונות" כדי להתחיל.</div>
+      </section>
+    </main>
+
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBw3-CYwSpyTpPhjc2uEM69VZ91ZmPNW-4",
+    authDomain: "farewell-gallery-edd51.firebaseapp.com",
+    projectId: "farewell-gallery-edd51",
+    storageBucket: "farewell-gallery-edd51.firebasestorage.app",
+    messagingSenderId: "1043217308704",
+    appId: "1:1043217308704:web:f72a6bd1c53876bc5b7045",
+    measurementId: "G-KEV32WY85Y"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+  </body>
+</html>
